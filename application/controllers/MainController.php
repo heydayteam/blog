@@ -6,6 +6,7 @@
 class MainController extends Controller
 {
     public $main_model;
+
     function __construct()
     {
         $this->init_models();
