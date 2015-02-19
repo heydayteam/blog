@@ -18,9 +18,9 @@ class SigninController extends Controller
     function show()
     {
         if($_POST['submit']) {
-            $login = $_POST['login'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
-            if ($this->user->authorization($login, $password)) {
+            if ($this->user->authorization($email, $password)) {
                 echo 'true';
             } else {
                 echo 'false';

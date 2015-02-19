@@ -18,10 +18,10 @@ class SignupController extends Controller
         if (!$_POST['submit']) {
             $this->view->generate('SignupView.php', 'template.php');
         } else {
-            $login = $_POST['login'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
-            if($this->user->checkLogin($login)) {
-                $this->user->createUser($login, $password);
+            if($this->user->checkEmail($email)) {
+                $this->user->createUser($email, $password);
             }
         }
     }

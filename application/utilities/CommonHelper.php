@@ -14,4 +14,11 @@ class CommonHelper
         }
         return crypt($input, '$2y$10$'. $salt);
     }
+
+    static function setAuthorizationSession($login, $password)
+    {
+        session_start();
+        $_SESSION['login'] = $login;
+        $_SESSION['password'] = $password;
+    }
 }

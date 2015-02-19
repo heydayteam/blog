@@ -11,10 +11,10 @@ class UserModel extends Model
         include_once 'application/utilities/CommonHelper.php';
     }
 
-    function checkLogin($login)
+    function checkEmail($email)
     {
         $mysqli = DatabaseHelper::connect();
-        $query = "SELECT login FROM user WHERE login = '$login'";
+        $query = "SELECT email FROM user WHERE email = '$email'";
         if($res = $mysqli->query($query)) {
             if ($res->num_rows == 0) {
                 $res->free();
@@ -29,23 +29,24 @@ class UserModel extends Model
         }
     }
 
-    function createUser($login, $password)
+    function createUser($email, $password)
     {
         $mysqli = DatabaseHelper::connect();
         $hashPass = CommonHelper::cryptPass($password);
-        $query = "INSERT INTO user(login, password) VALUES ('$login', '$hashPass')";
+        $query = "INSERT INTO user(email, password) VALUES ('$email', '$hashPass')";
         $mysqli->query($query);
     }
 
-    function authorization($login, $password)
+    function authorization($email, $password)
     {
         $mysqli = DatabaseHelper::connect();
-        $query = "SELECT login, password FROM user WHERE login = '$login'";
+        $query = "SELECT email, password FROM user WHERE email = '$email'";
         if ($result = $mysqli->query($query)) {
             $row = $result->fetch_assoc();
             if ($row['password'] == crypt($password, $row['password'])) {
                 $result->free();
                 return true;
+
             } else {
                 $result->free();
                 return false;
